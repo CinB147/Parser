@@ -12,7 +12,7 @@
 
 enum class TokenType {
     Plus, Star, OpenParen, CloseParen, Dot, OpenBrace, CloseBrace,
-    Letter, Number, Unknown, EndOfFile
+    Letter, Number, Ignore ,Unknown, EndOfFile
 };
 
 struct Token {

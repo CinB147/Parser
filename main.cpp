@@ -19,7 +19,7 @@ std::string tokenTypeToString(TokenType type) {
 
 
 int main() {
-    std::string input = "lo* could''.{3}";
+    std::string input = "lo\\O";
 
     try {
         lexer lex(input);

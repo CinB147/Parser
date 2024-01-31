@@ -7,4 +7,6 @@ add_executable(Lab1 main.cpp
         lexer.cpp
         lexer.h
         parser.cpp
-        parser.h)
+        parser.h
+        node.cpp
+        node.h)

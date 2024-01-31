@@ -20,41 +20,23 @@ void lexer::addToken(TokenType type, const std::string &val = "") {
 void lexer::tokenize() {
     while (!isEnd()) {
         char c = advance();
-        switch (c) {
-            case '+':
-                addToken(TokenType::Plus);
-                break;
-            case '*':
-                addToken(TokenType::Star);
-                break;
-            case '(':
-                addToken(TokenType::OpenParen);
-                break;
-            case ')':
-                addToken(TokenType::CloseParen);
-                break;
-            case '.':
-                addToken(TokenType::Dot);
-                break;
-            case '{':
-                addToken(TokenType::OpenBrace);
-                break;
-            case '}':
-                addToken(TokenType::CloseBrace);
-                break;
-            default:
-                if (std::isdigit(c)) {
-                    std::string number(1, c);
-                    while (std::isdigit(peek())) number += advance();
-                    addToken(TokenType::Number, number);
-                } else if (std::isalpha(c)) {
-                    std::string Letter(1, c);
-                    while (std::isalpha(peek()) || std::isdigit(peek())) Letter += advance();
-                    addToken(TokenType::Letter, Letter);
-                } else if (!std::isspace(c)) {
+        if (std::isdigit(c)) {
+            addToken(TokenType::Number, std::string(1, c));
+        } else if (std::isalpha(c) || std::isspace(c)) {
+            addToken(TokenType::Letter, std::string(1, c));
+        } else {
+            switch (c) {
+                case '+': addToken(TokenType::Plus); break;
+                case '*': addToken(TokenType::Star); break;
+                case '(': addToken(TokenType::OpenParen); break;
+                case ')': addToken(TokenType::CloseParen); break;
+                case '.': addToken(TokenType::Dot); break;
+                case '{': addToken(TokenType::OpenBrace); break;
+                case '}': addToken(TokenType::CloseBrace); break;
+                default:
                     addToken(TokenType::Unknown, std::string(1, c));
-                }
-                break;
+                    break;
+            }
         }
     }
     addToken(TokenType::EndOfFile);
